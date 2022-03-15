@@ -15,14 +15,14 @@ function DnD(canvas, interactor) {
     this.isclicked =true;
     this.XStartPos = getMousePosition(this.canvas,evt).x;
     this.YStartPos = getMousePosition(this.canvas,evt).y;
-    console.log(this.XStartPos + "--" + this.YStartPos);
+  // console.log(this.XStartPos + "--" + this.YStartPos);
   }.bind(this);
 
   this.KeepClick = function (evt) {
     if(this.isclicked){
       this.XEndPos = getMousePosition(this.canvas,evt).x;
       this.YEndPos = getMousePosition(this.canvas,evt).y;
-      console.log(this.XEndPos + "--" + this.YEndPos);
+     // console.log(this.XEndPos + "--" + this.YEndPos);
     }
   }.bind(this);
 
@@ -30,7 +30,7 @@ function DnD(canvas, interactor) {
     this.isclicked = false;
     this.XEndPos = getMousePosition(this.canvas,evt).x;
     this.YEndPos = getMousePosition(this.canvas,evt).y;
-    console.log(this.XEndPos + "--" + this.YEndPos);
+  //  console.log(this.XEndPos + "--" + this.YEndPos);
   }.bind(this);
     	// Associer les fonctions précédentes aux évènements du canvas.
       this.canvas.addEventListener('mousedown', this.OnClick, false);
