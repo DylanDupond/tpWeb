@@ -9,13 +9,33 @@ function DnD(canvas, interactor) {
   this.YEndPos = 0;
   this.isclicked = false;
   this.canvas = canvas;
+  this.interactor = interactor;
+
+
+  this.getXStart = function() {
+    return   this.XStartPos;
+  }.bind(this);
+
+  this.getYStart = function() {
+    return   this.YStartPos;
+   }.bind(this);
+
+  this.getXEnd = function() {
+    return   this.XEndPos;
+  }.bind(this);
+
+  this.getYEnd = function() {
+    return   this.YEndPos;
+  }.bind(this);
+
 	// Developper les 3 fonctions gérant les événements
 
   this.OnClick = function (evt) {
     this.isclicked =true;
     this.XStartPos = getMousePosition(this.canvas,evt).x;
     this.YStartPos = getMousePosition(this.canvas,evt).y;
-  // console.log(this.XStartPos + "--" + this.YStartPos);
+  //console.log(this.XStartPos + "--" + this.YStartPos);
+  this.interactor.onInteractionStart(this);
   }.bind(this);
 
   this.KeepClick = function (evt) {
@@ -23,6 +43,7 @@ function DnD(canvas, interactor) {
       this.XEndPos = getMousePosition(this.canvas,evt).x;
       this.YEndPos = getMousePosition(this.canvas,evt).y;
      // console.log(this.XEndPos + "--" + this.YEndPos);
+     this.interactor.onInteractionUpdate(this);
     }
   }.bind(this);
 
@@ -30,8 +51,11 @@ function DnD(canvas, interactor) {
     this.isclicked = false;
     this.XEndPos = getMousePosition(this.canvas,evt).x;
     this.YEndPos = getMousePosition(this.canvas,evt).y;
-  //  console.log(this.XEndPos + "--" + this.YEndPos);
+   console.log(this.XEndPos + "--" + this.YEndPos);
+  this.interactor.onInteractionEnd(this);
   }.bind(this);
+
+
     	// Associer les fonctions précédentes aux évènements du canvas.
       this.canvas.addEventListener('mousedown', this.OnClick, false);
       this.canvas.addEventListener('mousemove', this.KeepClick, false);
